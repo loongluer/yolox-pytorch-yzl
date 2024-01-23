@@ -186,25 +186,25 @@ class YOLO(object):
         #   图像绘制
         #---------------------------------------------------------#
 
-        def check_intersection(box1, box2):
-            """
-            检查两个矩形框是否相交
+        # def check_intersection(box1, box2):
+        #     """
+        #     检查两个矩形框是否相交
 
-            Args:
-                box1: 第一个矩形框，表示为 (x1, y1, x2, y2)
-                box2: 第二个矩形框，表示为 (x1, y1, x2, y2)
+        #     Args:
+        #         box1: 第一个矩形框，表示为 (x1, y1, x2, y2)
+        #         box2: 第二个矩形框，表示为 (x1, y1, x2, y2)
 
-            Returns:
-                True 如果两个矩形框相交，否则返回 False
-            """
-            x1, y1, x2, y2 = box1
-            x3, y3, x4, y4 = box2
+        #     Returns:
+        #         True 如果两个矩形框相交，否则返回 False
+        #     """
+        #     x1, y1, x2, y2 = box1
+        #     x3, y3, x4, y4 = box2
 
-            # 判断两个矩形框是否有重叠部分
-            if x3 >= x2 or x1 >= x4 or y3 >= y2 or y1 >= y4:
-                return False
-            else:
-                return True
+        #     # 判断两个矩形框是否有重叠部分
+        #     if x3 >= x2 or x1 >= x4 or y3 >= y2 or y1 >= y4:
+        #         return False
+        #     else:
+        #         return True
 
 
         for i, c in list(enumerate(top_label)):
@@ -236,40 +236,40 @@ class YOLO(object):
             draw.text(text_origin, str(label,'UTF-8'), fill=(0, 0, 0), font=font)
             del draw
 
-        # 判断识别框两两是否相交
-        has_intersection = False
-        for i in range(len(top_boxes) - 1):
-            for j in range(i + 1, len(top_boxes)):
-                box1 = top_boxes[i]
-                box2 = top_boxes[j]
+        # # 判断识别框两两是否相交
+        # has_intersection = False
+        # for i in range(len(top_boxes) - 1):
+        #     for j in range(i + 1, len(top_boxes)):
+        #         box1 = top_boxes[i]
+        #         box2 = top_boxes[j]
 
-                if check_intersection(box1, box2):
-                    has_intersection = True
-                    break
-            if has_intersection:
-                break
+        #         if check_intersection(box1, box2):
+        #             has_intersection = True
+        #             break
+        #     if has_intersection:
+        #         break
 
-         # 如果识别框相交
-        if has_intersection: 
-            print("存在相交")
-            return image
-        else: 
-            from PIL import Image
+        #  # 如果识别框相交
+        # if has_intersection: 
+        #     print("存在相交")
+        #     return image
+        # else: 
+        #     from PIL import Image
 
-            # 假设image是一个PIL图像对象
-            # 将图像转换为黑白模式
-            image = image.convert('L')
+        #     # 假设image是一个PIL图像对象
+        #     # 将图像转换为黑白模式
+        #     image = image.convert('L')
 
-            # 将图像中所有像素设置为纯黑色
-            image = image.point(lambda x: 0)
+        #     # 将图像中所有像素设置为纯黑色
+        #     image = image.point(lambda x: 0)
 
-            # 或者直接创建一个与原图像相同大小的全黑图像
-            width, height = image.size
-            black_image = Image.new('L', (width, height), color=0)
+        #     # 或者直接创建一个与原图像相同大小的全黑图像
+        #     width, height = image.size
+        #     black_image = Image.new('L', (width, height), color=0)
           
-            return black_image
+        #     return black_image
 
-        # return image
+        return image
 
     
     def get_FPS(self, image, test_interval):
