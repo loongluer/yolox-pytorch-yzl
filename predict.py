@@ -158,33 +158,33 @@ if __name__ == "__main__":
                     os.makedirs(dir_save_path)
                 r_image.save(os.path.join(dir_save_path, img_name.replace(".jpg", ".png")), quality=95, subsampling=0)
         
-        def is_pure_black(r_image):
-            # 将图像转换为黑白模式
-            r_image = r_image.convert('L')
+        # def is_pure_black(r_image):
+        #     # 将图像转换为黑白模式
+        #     r_image = r_image.convert('L')
             
-            # 获取图像中的像素值
-            pixels = r_image.getdata()
+        #     # 获取图像中的像素值
+        #     pixels = r_image.getdata()
             
-            # 判断是否存在非黑色像素
-            for pixel in pixels:
-                if pixel != 0:
-                    return False
+        #     # 判断是否存在非黑色像素
+        #     for pixel in pixels:
+        #         if pixel != 0:
+        #             return False
             
-            return True
+        #     return True
 
-        # 遍历目录中的图片文件
-        for filename in os.listdir(dir_save_path):
-            if filename.lower().endswith(('.bmp', '.dib', '.png', '.jpg', '.jpeg', '.pbm', '.pgm', '.ppm', '.tif', '.tiff')):
-                image_path = os.path.join(dir_save_path, filename)
+        # # 遍历目录中的图片文件
+        # for filename in os.listdir(dir_save_path):
+        #     if filename.lower().endswith(('.bmp', '.dib', '.png', '.jpg', '.jpeg', '.pbm', '.pgm', '.ppm', '.tif', '.tiff')):
+        #         image_path = os.path.join(dir_save_path, filename)
                 
-                # 打开图像文件
-                image = Image.open(image_path)
+        #         # 打开图像文件
+        #         image = Image.open(image_path)
                 
-                # 判断是否为纯黑色图像
-                if is_pure_black(image):
-                    # 删除纯黑色图像文件
-                    os.remove(image_path)
-                    print(f"Deleted {image_path}")
+        #         # 判断是否为纯黑色图像
+        #         if is_pure_black(image):
+        #             # 删除纯黑色图像文件
+        #             os.remove(image_path)
+        #             print(f"Deleted {image_path}")
 
 
     elif mode == "heatmap":
